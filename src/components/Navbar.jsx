@@ -1,10 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const linksRef = useRef([]);
+  const [activeSection, setActiveSection] = useState('skills');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -35,10 +39,34 @@ const Navbar = () => {
           delay: 0.7
         }
       );
+
+      // Set up scroll triggers for active section detection
+      const sections = [
+        { id: 'skills', selector: '#skills' },
+        { id: 'projects', selector: '#projects' },
+        { id: 'about', selector: '#about' }
+      ];
+
+      sections.forEach(section => {
+        ScrollTrigger.create({
+          trigger: section.selector,
+          start: 'top center',
+          end: 'bottom center',
+          onEnter: () => setActiveSection(section.id),
+          onEnterBack: () => setActiveSection(section.id),
+        });
+      });
     });
 
     return () => ctx.revert();
   }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 px-16 py-8">
@@ -53,37 +81,31 @@ const Navbar = () => {
 
         <ul className="flex items-center gap-16">
           <li ref={el => linksRef.current[0] = el}>
-            <a
-              href="#sobre"
-              className="text-white text-base font-normal relative inline-block pb-2"
-            >
-              Sobre
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA]"></span>
-            </a>
-          </li>
-          <li ref={el => linksRef.current[1] = el}>
-            <a
-              href="#skills"
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors"
+            <button
+              onClick={() => scrollToSection('skills')}
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
             >
               Skills
-            </a>
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'skills' ? 'opacity-100' : 'opacity-0'}`}></span>
+            </button>
+          </li>
+          <li ref={el => linksRef.current[1] = el}>
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
+            >
+              Projects
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'projects' ? 'opacity-100' : 'opacity-0'}`}></span>
+            </button>
           </li>
           <li ref={el => linksRef.current[2] = el}>
-            <a
-              href="#laboratorio"
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors"
+            <button
+              onClick={() => scrollToSection('about')}
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
             >
-              Laboratório
-            </a>
-          </li>
-          <li ref={el => linksRef.current[3] = el}>
-            <a
-              href="#contato"
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors"
-            >
-              Contato
-            </a>
+              About Me
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}></span>
+            </button>
           </li>
         </ul>
       </div>

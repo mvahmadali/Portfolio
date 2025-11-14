@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsShowcase = () => {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -185,7 +187,7 @@ const ProjectsShowcase = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-16 overflow-hidden">
+    <section id="projects" ref={sectionRef} className="relative py-32 px-16 overflow-hidden">
       {/* Background */}
       <div
         ref={bgRef}
@@ -225,6 +227,7 @@ const ProjectsShowcase = () => {
           </p>
           <button
             ref={buttonRef}
+            onClick={() => navigate('/projects')}
             className="px-8 py-3 border border-[#64FFDA] text-[#64FFDA] rounded-lg font-medium tracking-wide hover:bg-[#64FFDA]/10 transition-all duration-300 hover:shadow-[0_0_20px_rgba(100,255,218,0.2)] relative overflow-hidden group"
           >
             <span className="relative z-10">View All Projects</span>

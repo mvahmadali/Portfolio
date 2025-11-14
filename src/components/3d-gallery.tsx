@@ -19,6 +19,7 @@ interface Project {
   bg: string
   position: [number, number, number]
   rotation: [number, number, number]
+  url?: string
 }
 
 interface FrameProps extends Project {
@@ -64,7 +65,7 @@ function CardContent({ project }: { project: Project }) {
   )
 }
 
-function Frame({ id, bg, width = 1, height = 1.618, children, position, rotation, ...project }: FrameProps & Project) {
+function Frame({ id, bg, width = 1, height = 1.618, children, position, rotation, url, ...project }: FrameProps & Project) {
   const meshRef = useRef<THREE.Mesh>(null)
   const groupRef = useRef<THREE.Group>(null)
   const [hovered, hover] = useState(false)
@@ -77,6 +78,12 @@ function Frame({ id, bg, width = 1, height = 1.618, children, position, rotation
       easing.damp(material, "emissiveIntensity", hovered ? 0.5 : 0.1, 0.2, dt)
     }
   })
+
+  const handleDoubleClick = () => {
+    if (url) {
+      window.open(url, '_blank')
+    }
+  }
 
   return (
     <group
@@ -91,6 +98,7 @@ function Frame({ id, bg, width = 1, height = 1.618, children, position, rotation
         e.stopPropagation()
         hover(false)
       }}
+      onDoubleClick={handleDoubleClick}
     >
       <mesh ref={meshRef}>
         <roundedPlaneGeometry args={[width, height, 0.1]} />
@@ -158,6 +166,7 @@ export default function Gallery3D() {
       bg: "#0a192f",
       position: [-1.25, 0, 0],
       rotation: [0, 0.5, 0],
+      url: "https://furniture-configurator-eta.vercel.app/"
     },
     {
       id: "project-2",
@@ -170,6 +179,7 @@ export default function Gallery3D() {
       bg: "#0a192f",
       position: [0, 0, 0],
       rotation: [0, 0, 0],
+      url: "https://mern-gym-five.vercel.app/"
     },
     {
       id: "project-3",
@@ -182,6 +192,7 @@ export default function Gallery3D() {
       bg: "#0a192f",
       position: [1.25, 0, 0],
       rotation: [0, -0.5, 0],
+      url: "https://gsap-rho-eight.vercel.app/"
     },
     {
       id: "project-4",
@@ -194,6 +205,7 @@ export default function Gallery3D() {
       bg: "#0a192f",
       position: [-2.75, 0, 0],
       rotation: [0, 0.5, 0],
+      url: "https://maze-gamma-nine.vercel.app/"
     },
     {
       id: "project-6",
@@ -206,11 +218,19 @@ export default function Gallery3D() {
       bg: "#0a192f",
       position: [2.75, 0, 0],
       rotation: [0, -0.5, 0],
+      url: "https://mern-food-jkx1.vercel.app/"
     },
   ]
 
   return (
     <div className="relative w-full h-screen bg-transparent overflow-hidden">
+      {/* Instructional Text */}
+      <div className="absolute top-8 left-8 z-30 pointer-events-none">
+        <p className="text-[#64FFDA] text-sm font-medium tracking-wide">
+          Drag and hop around. You can move it's 3D
+        </p>
+      </div>
+
       <div className="absolute inset-0 pointer-events-none z-20">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse"></div>
         <div

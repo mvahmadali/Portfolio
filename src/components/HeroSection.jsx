@@ -163,20 +163,27 @@ const HeroSection = () => {
           <div>
             <button 
               ref={setRef('button')}
-              className="relative px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group"
+              className="relative px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group transition-all duration-300"
             >
-              <span className="relative z-10 group-hover:text-[#0a192f] transition-colors duration-300">BAIXAR CURRÍCULO</span>
+              <span className="relative z-10 group-hover:text-[#0a192f] transition-colors duration-500">BAIXAR CURRÍCULO</span>
               
-              {/* Hover effect background */}
-              <div className="absolute inset-0 bg-[#64FFDA] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              {/* Animated border effect */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#64FFDA] transition-all duration-300" 
+                   style={{
+                     background: 'linear-gradient(90deg, transparent, #64FFDA, transparent)',
+                     backgroundSize: '200% 100%',
+                     animation: 'borderGlow 2s linear infinite',
+                     opacity: 0
+                   }}
+              />
               
-              {/* Glow effect */}
+              {/* Fill effect from bottom */}
+              <div className="absolute inset-0 bg-[#64FFDA] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
+              
+              {/* Ripple effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute inset-0 bg-[#64FFDA] blur-md transform scale-125" />
+                <div className="absolute inset-0 bg-[#64FFDA] opacity-30 blur-xl transform scale-150 group-hover:scale-100 transition-transform duration-500" />
               </div>
-
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-700"></div>
             </button>
           </div>
         </div>
