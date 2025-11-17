@@ -130,8 +130,8 @@ const HeroSection = () => {
       />
 
       {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[500px] animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[500px] animate-pulse" style={{ animationDelay: '1s' }}></div>
 
       {/* Main content */}
       <div className="relative z-10 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center pt-20" style={{ perspective: '1200px' }}>
@@ -161,11 +161,13 @@ const HeroSection = () => {
           </p>
 
           <div>
-            <button 
+            <a 
+              href="/public/Resume-11-25.pdf"
+              download="Muhammad_Ahmad_Ali_Resume.pdf"
               ref={setRef('button')}
-              className="relative px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group transition-all duration-300"
+              className="relative inline-block px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group transition-all duration-300"
             >
-              <span className="relative z-10 group-hover:text-[#0a192f] transition-colors duration-500">BAIXAR CURRÍCULO</span>
+              <span className="relative z-10 group-hover:text-[#0a192f] transition-colors duration-500">Download Resume</span>
               
               {/* Animated border effect */}
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#64FFDA] transition-all duration-300" 
@@ -184,7 +186,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute inset-0 bg-[#64FFDA] opacity-30 blur-xl transform scale-150 group-hover:scale-100 transition-transform duration-500" />
               </div>
-            </button>
+            </a>
           </div>
         </div>
 

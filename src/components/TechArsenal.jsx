@@ -208,7 +208,7 @@ const TechArsenal = () => {
             { name: 'GSAP', icon: SiGreensock, color: '#88CE02', bgGradient: 'from-green-400/10 to-green-500/5' },
 
     { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', bgGradient: 'from-blue-500/10 to-blue-600/5' },
-    { name: 'React three fiber', icon: SiReact, color: '#61DAFB', bgGradient: 'from-cyan-400/10 to-cyan-500/5' },
+    { name: 'React Native', icon: SiReact, color: '#61DAFB', bgGradient: 'from-cyan-400/10 to-cyan-500/5' },
     { name: 'Node.js', icon: SiNodedotjs, color: '#339933', bgGradient: 'from-green-500/10 to-green-600/5' },
     { name: 'Express', icon: SiExpress, color: '#FFFFFF', bgGradient: 'from-slate-400/10 to-slate-500/5' },
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248', bgGradient: 'from-green-500/10 to-green-600/5' },
@@ -228,8 +228,8 @@ const TechArsenal = () => {
       ></div>
 
       {/* Animated gradient orbs */}
-      <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[500px] animate-pulse"></div>
+      <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[500px] animate-pulse" style={{ animationDelay: '1.5s' }}></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto">

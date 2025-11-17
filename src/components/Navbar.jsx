@@ -61,13 +61,6 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 px-16 py-8">
       <div className="max-w-[1600px] mx-auto flex items-center justify-between">
@@ -81,31 +74,28 @@ const Navbar = () => {
 
         <ul className="flex items-center gap-16">
           <li ref={el => linksRef.current[0] = el}>
-            <button
-              onClick={() => scrollToSection('skills')}
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
+            <span
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2 cursor-default"
             >
               Skills
               <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'skills' ? 'opacity-100' : 'opacity-0'}`}></span>
-            </button>
+            </span>
           </li>
           <li ref={el => linksRef.current[1] = el}>
-            <button
-              onClick={() => scrollToSection('projects')}
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
+            <span
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2 cursor-default"
             >
               Projects
               <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'projects' ? 'opacity-100' : 'opacity-0'}`}></span>
-            </button>
+            </span>
           </li>
           <li ref={el => linksRef.current[2] = el}>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2"
+            <span
+              className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2 cursor-default"
             >
               About Me
               <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#64FFDA] transition-opacity duration-300 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}></span>
-            </button>
+            </span>
           </li>
         </ul>
       </div>

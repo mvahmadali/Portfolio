@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, Github, Linkedin } from "lucide-react"
+import { Mail, Github, Linkedin, Heart, Code } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +15,9 @@ const AboutMe = () => {
   const nameRef = useRef(null);
   const socialLinksRef = useRef([]);
   const descriptionRef = useRef(null);
+  const footerLineRef = useRef(null);
+  const footerContentRef = useRef(null);
+  const footerSocialLinksRef = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -92,20 +95,18 @@ const AboutMe = () => {
         }
       );
 
-      // Profile image dramatic entrance with rotation
+      // Profile image smooth entrance from left
       gsap.fromTo(
         profileImageRef.current,
         {
-          scale: 0,
+          x: -100,
           opacity: 0,
-          rotateZ: -180,
         },
         {
-          scale: 1,
+          x: 0,
           opacity: 1,
-          rotateZ: 0,
-          duration: 1.2,
-          ease: 'elastic.out(1, 0.6)',
+          duration: 1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: imageContainerRef.current,
             start: 'top 70%',
@@ -118,15 +119,6 @@ const AboutMe = () => {
       gsap.to(profileImageRef.current, {
         y: -15,
         duration: 3,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // Profile image subtle rotation
-      gsap.to(profileImageRef.current, {
-        rotateZ: 5,
-        duration: 4,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
@@ -231,6 +223,63 @@ const AboutMe = () => {
         },
       });
 
+      // Footer line animation
+      gsap.fromTo(
+        footerLineRef.current,
+        { scaleX: 0, opacity: 0 },
+        {
+          scaleX: 1,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: footerLineRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Footer content fade in
+      gsap.fromTo(
+        footerContentRef.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: footerContentRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+
+      // Footer social links animation
+      footerSocialLinksRef.current.forEach((link, index) => {
+        if (!link) return;
+
+        gsap.fromTo(
+          link,
+          { y: 30, opacity: 0, scale: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            delay: 0.2 + index * 0.1,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: footerContentRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -242,8 +291,14 @@ const AboutMe = () => {
     }
   };
 
+  const addToFooterSocialRefs = (el) => {
+    if (el && !footerSocialLinksRef.current.includes(el)) {
+      footerSocialLinksRef.current.push(el);
+    }
+  };
+
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 px-16 overflow-hidden">
+    <section id="about" ref={sectionRef} className="relative py-24 pb-32 px-16 overflow-hidden">
       {/* Background */}
       <div
         ref={bgRef}
@@ -251,8 +306,8 @@ const AboutMe = () => {
       ></div>
 
       {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.03] rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[100px] animate-pulse"></div>
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#64FFDA] opacity-[0.015] rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto">
@@ -274,7 +329,7 @@ const AboutMe = () => {
         </div>
 
         {/* Main content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
           {/* Profile Image and Social Links */}
           <div ref={imageContainerRef} className="flex flex-col items-center" style={{ perspective: '1200px' }}>
             <div className="mb-8">
@@ -297,7 +352,7 @@ const AboutMe = () => {
             <div className="flex gap-6" style={{ perspective: '800px' }}>
               <a
                 ref={addToSocialRefs}
-                href="mailto:your-email@example.com"
+                href="mailto:ahmedbinnavid@gmail.com"
                 className="text-[#64FFDA] hover:text-white transition-colors duration-200 p-3 border border-[#64FFDA] rounded hover:bg-[#64FFDA]/10"
                 aria-label="Email"
               >
@@ -305,7 +360,7 @@ const AboutMe = () => {
               </a>
               <a
                 ref={addToSocialRefs}
-                href="https://github.com"
+                href="https://github.com/mvahmadali"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#64FFDA] hover:text-white transition-colors duration-200 p-3 border border-[#64FFDA] rounded hover:bg-[#64FFDA]/10"
@@ -315,7 +370,7 @@ const AboutMe = () => {
               </a>
               <a
                 ref={addToSocialRefs}
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/muhammad-ahmad-ali-563b22266/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#64FFDA] hover:text-white transition-colors duration-200 p-3 border border-[#64FFDA] rounded hover:bg-[#64FFDA]/10"
@@ -331,6 +386,39 @@ const AboutMe = () => {
             <p className="text-[#8892B0] text-lg leading-[1.8]">
               I am a results-driven Software Engineer specializing in full-stack and mobile application development, with hands-on experience in React Native, Flask, and the MERN stack. Currently working at Just Dev It (JDI), I have contributed to the design and implementation of production-grade healthcare solutions, developing modular, scalable interfaces and integrating RESTful APIs for real-time synchronization. My academic foundation from Forman Christian College and practical exposure through diverse projects — including CrashAnalytix, an AI-powered accident detection and analysis system — have strengthened my skills in AI integration, model development, and end-to-end system design. I am passionate about building impactful, data-driven solutions that combine artificial intelligence with modern web technologies to address real-world challenges.
             </p>
+          </div>
+        </div>
+
+        {/* Footer Section */}
+        <div className="mt-32">
+          {/* Decorative line */}
+          <div className="mb-12">
+            <div
+              ref={footerLineRef}
+              className="h-[2px] bg-gradient-to-r from-transparent via-[#64FFDA] to-transparent transform origin-left"
+            ></div>
+          </div>
+
+          {/* Footer content */}
+          <div ref={footerContentRef}>
+            <div className="flex flex-col items-center space-y-8">
+              {/* Logo and tagline */}
+              <div className="text-center space-y-3">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-[#64FFDA] text-2xl font-bold">&lt;/</span>
+                  <span className="text-white text-2xl font-medium tracking-wide">
+                    mvahmadali
+                  </span>
+                  <span className="text-[#64FFDA] text-2xl font-bold">&gt;</span>
+                </div>
+                <p className="text-[#8892B0] text-sm flex items-center gap-2 justify-center">
+                  <span>Crafted with</span>
+                  <Heart className="w-4 h-4 text-[#64FFDA] fill-[#64FFDA]" />
+                  <span>and</span>
+                  <Code className="w-4 h-4 text-[#64FFDA]" />
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
