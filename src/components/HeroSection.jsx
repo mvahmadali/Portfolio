@@ -162,7 +162,7 @@ const HeroSection = () => {
 
           <div>
             <a 
-              href="/public/Resume-11-25.pdf"
+              href="/Resume-11-25.pdf"
               download="Muhammad_Ahmad_Ali_Resume.pdf"
               ref={setRef('button')}
               className="relative inline-block px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group transition-all duration-300"
