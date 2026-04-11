@@ -384,8 +384,7 @@ const AboutMe = () => {
           {/* Description */}
           <div ref={descriptionRef} className="space-y-6">
             <p className="text-[#8892B0] text-lg leading-[1.8]">
-              I am a results-driven Software Engineer specializing in full-stack and mobile application development, with hands-on experience in React Native, Flask, and the MERN stack. Currently working at Just Dev It (JDI), I have contributed to the design and implementation of production-grade healthcare solutions, developing modular, scalable interfaces and integrating RESTful APIs for real-time synchronization. My academic foundation from Forman Christian College and practical exposure through diverse projects — including CrashAnalytix, an AI-powered accident detection and analysis system — have strengthened my skills in AI integration, model development, and end-to-end system design. I am passionate about building impactful, data-driven solutions that combine artificial intelligence with modern web technologies to address real-world challenges.
-            </p>
+Computer Science graduate and a results-driven Software Engineer specializing in frontend and full stack development, with hands-on experience in React Native, and the MERN stack. I have contributed to the design and implementation of production-grade solutions, developing modular, scalable interfaces and integrating RESTful APIs for real-time synchronization. My academic foundation from Forman Christian College and practical exposure through diverse projects throughout my professional career proves me as an engineer and not as a coder or developer. Passionate about building impactful, data-driven solutions that combine artificial intelligence with latest technologies to address real-world challenges.            </p>
           </div>
         </div>
 
