@@ -8,7 +8,17 @@ const Navbar = () => {
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const linksRef = useRef([]);
-  const [activeSection, setActiveSection] = useState('skills');
+  const mobileLabelRef = useRef(null);
+  const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+  const getMobileStartX = () => -Math.max(window.innerWidth * 0.9, 320);
+  const [activeSection, setActiveSection] = useState('home');
+
+  const sectionLabelMap = {
+    home: '</mvahmadali>',
+    skills: 'Skills',
+    projects: 'Projects',
+    about: 'About Me'
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,6 +52,7 @@ const Navbar = () => {
 
       // Set up scroll triggers for active section detection
       const sections = [
+        { id: 'home', selector: '#home' },
         { id: 'skills', selector: '#skills' },
         { id: 'projects', selector: '#projects' },
         { id: 'about', selector: '#about' }
@@ -50,10 +61,23 @@ const Navbar = () => {
       sections.forEach(section => {
         ScrollTrigger.create({
           trigger: section.selector,
-          start: 'top center',
-          end: 'bottom center',
+          start: 'top 78%',
+          end: 'top 35%',
           onEnter: () => setActiveSection(section.id),
           onEnterBack: () => setActiveSection(section.id),
+          onUpdate: (self) => {
+            if (!isMobile() || !mobileLabelRef.current || !self.isActive) return;
+
+            const progress = gsap.utils.clamp(0, 1, self.progress);
+            gsap.to(mobileLabelRef.current, {
+              x: gsap.utils.interpolate(getMobileStartX(), 0, progress),
+              opacity: gsap.utils.interpolate(0.35, 1, progress),
+              filter: `blur(${(1 - progress) * 5}px)`,
+              duration: 0.2,
+              ease: 'none',
+              overwrite: 'auto'
+            });
+          },
         });
       });
     });
@@ -61,10 +85,22 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (!mobileLabelRef.current) return;
+
+    gsap.killTweensOf(mobileLabelRef.current);
+
+    gsap.fromTo(
+      mobileLabelRef.current,
+      { x: getMobileStartX(), opacity: 0.25, filter: 'blur(6px)' },
+      { x: 0, opacity: 1, filter: 'blur(0px)', duration: 1.05, ease: 'power1.out' }
+    );
+  }, [activeSection]);
+
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 px-16 py-8">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 px-4 py-5 sm:px-8 sm:py-6 lg:px-16 lg:py-8">
       <div className="max-w-[1600px] mx-auto flex items-center justify-between">
-        <div ref={logoRef} className="flex items-center gap-2">
+        <div ref={logoRef} className="hidden md:flex items-center gap-2">
           <span className="text-[#64FFDA] text-2xl font-bold">&lt;/</span>
           <span className="text-white text-3xl font-medium tracking-wide">
             mvahmadali
@@ -72,7 +108,17 @@ const Navbar = () => {
           <span className="text-[#64FFDA] text-3xl font-bold">&gt;</span>
         </div>
 
-        <ul className="flex items-center gap-16">
+        <div className="md:hidden w-full overflow-hidden text-center">
+          <span
+            ref={mobileLabelRef}
+            key={activeSection}
+            className="block text-[#E6F1FF] text-lg font-semibold tracking-wide"
+          >
+            {sectionLabelMap[activeSection]}
+          </span>
+        </div>
+
+        <ul className="hidden md:flex items-center gap-16">
           <li ref={el => linksRef.current[0] = el}>
             <span
               className="text-[#A8B2D1] text-base font-normal hover:text-[#64FFDA] transition-colors relative inline-block pb-2 cursor-default"

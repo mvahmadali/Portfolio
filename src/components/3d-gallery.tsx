@@ -226,8 +226,11 @@ export default function Gallery3D() {
     <div className="relative w-full h-screen bg-transparent overflow-hidden">
       {/* Instructional Text */}
       <div className="absolute top-8 left-8 z-30 pointer-events-none">
-        <p className="text-[#64FFDA] text-sm font-medium tracking-wide">
+        <p className="hidden md:block text-[#64FFDA] text-sm font-medium tracking-wide">
           Drag and hop around. You can move it's 3D
+        </p>
+        <p className="md:hidden text-[#64FFDA] text-sm font-medium tracking-wide">
+          Zoom out and hop around in 3D !
         </p>
       </div>
 

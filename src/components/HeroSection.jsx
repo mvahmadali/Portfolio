@@ -9,6 +9,14 @@ const HeroSection = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
+      // Mobile brand text appears above the subtitle
+      tl.fromTo(
+        elementsRef.current.brand,
+        { x: -60, opacity: 0, filter: 'blur(8px)' },
+        { x: 0, opacity: 1, filter: 'blur(0px)', duration: 0.85 },
+        0.15
+      );
+
       // Enhanced background animation with rotation
       tl.fromTo(
         elementsRef.current.bg,
@@ -122,7 +130,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-16 overflow-hidden">
+    <section id="home" ref={containerRef} className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-16 overflow-hidden">
       {/* Background */}
       <div 
         ref={setRef('bg')}
@@ -138,6 +146,15 @@ const HeroSection = () => {
         
         {/* Left content */}
         <div className="space-y-6 lg:space-y-7">
+          <div
+            ref={setRef('brand')}
+            className="md:hidden flex items-center gap-1.5 text-sm font-medium tracking-wide"
+          >
+            <span className="text-[#64FFDA] text-lg font-bold">&lt;/</span>
+            <span className="text-white text-lg font-medium tracking-wide">mvahmadali</span>
+            <span className="text-[#64FFDA] text-lg font-bold">&gt;</span>
+          </div>
+
           <p 
             ref={setRef('subtitle')}
             className="text-[#64FFDA] text-xs font-medium tracking-[0.2em] uppercase"
@@ -162,7 +179,7 @@ const HeroSection = () => {
 
           <div>
             <a 
-              href="/Resume-11-25.pdf"
+              href="/Resume-4-26(2).pdf"
               download="Muhammad_Ahmad_Ali_Resume.pdf"
               ref={setRef('button')}
               className="relative inline-block px-6 py-3 lg:px-8 lg:py-3.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs lg:text-[13px] tracking-[0.15em] uppercase bg-transparent overflow-hidden group transition-all duration-300"

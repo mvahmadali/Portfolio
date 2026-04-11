@@ -10,7 +10,7 @@ function ProjectsGallery() {
       {/* Back to Home Button */}
       <Link 
         to="/"
-        className="fixed top-8 right-8 z-50 px-6 py-3 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-sm tracking-wide uppercase bg-[#0a192f]/80 backdrop-blur-sm hover:bg-[#64FFDA] hover:text-[#0a192f] transition-all duration-300 rounded-lg"
+        className="fixed left-1/2 -translate-x-1/2 bottom-5 z-50 px-5 py-2.5 border-2 border-[#64FFDA] text-[#64FFDA] font-medium text-xs tracking-wide uppercase bg-[#0a192f]/85 backdrop-blur-sm hover:bg-[#64FFDA] hover:text-[#0a192f] transition-all duration-300 rounded-lg md:top-8 md:right-8 md:bottom-auto md:left-auto md:translate-x-0 md:px-6 md:py-3 md:text-sm"
       >
         ← Back to Home
       </Link>
